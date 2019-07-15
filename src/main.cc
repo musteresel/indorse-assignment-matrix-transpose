@@ -45,6 +45,7 @@ main()
     }
   std::vector<int> matrix;
   matrix.resize(rows * columns);
+  std::cout << "Values? (separated by whitespace)" << std::endl;
   for (unsigned i = 0; i < matrix.size(); ++i)
     {
       if (! (std::cin >> matrix[i]))
