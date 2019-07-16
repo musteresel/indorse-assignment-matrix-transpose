@@ -34,8 +34,10 @@ PrintMatrix(std::vector<int> const & matrix,
 int
 main()
 {
+#ifndef SILENT
   std::cout << "Rows? Columns? (separated by whitespace)"
             << std::endl;
+#endif
   unsigned rows, columns;
   if (! (std::cin >> rows >> columns))
     {
@@ -45,7 +47,9 @@ main()
     }
   std::vector<int> matrix;
   matrix.resize(rows * columns);
+#ifndef SILENT
   std::cout << "Values? (separated by whitespace)" << std::endl;
+#endif
   for (unsigned i = 0; i < matrix.size(); ++i)
     {
       if (! (std::cin >> matrix[i]))
@@ -57,9 +61,15 @@ main()
     }
   std::vector<int> result;
   Transpose(matrix, rows, columns, result);
+#ifndef SILENT
   std::cout << "Input:\n";
+#endif
   PrintMatrix(matrix, rows, columns);
+#ifndef SILENT
   std::cout << "\nOutput:\n";
+#else
+  std::cout << "\n";
+#endif
   PrintMatrix(result, columns, rows);
   std::cout << std::endl;
 }
