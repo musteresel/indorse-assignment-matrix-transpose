@@ -7,6 +7,12 @@
 #include "transpose.h"
 
 
+unsigned const MAX_ROWS = 7;
+
+
+unsigned const MAX_COLUMNS = 7;
+
+
 void
 PrintMatrix(std::vector<int> const & matrix,
             unsigned const rows,
@@ -36,7 +42,7 @@ HasValidDimensions(unsigned const rows,
                    unsigned const columns)
 {
   return (rows > 0) && (columns > 0)
-    && (rows < 8) && (columns < 8);
+    && (rows <= MAX_ROWS) && (columns <= MAX_COLUMNS);
 }
 
 
