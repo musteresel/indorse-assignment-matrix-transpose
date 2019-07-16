@@ -1,6 +1,7 @@
 SOURCES=src/main.cc src/transpose.cc src/adapter.cc
 HEADERS=src/transpose.h
-TESTS=square1 square3
+TESTS=square1 square3 wide high
+FAIL_TESTS=too_small too_large missing_column missing_data
 
 
 TARGET=transpose
@@ -29,4 +30,8 @@ test: ${TARGET}-silent
 	@for f in ${TESTS}; \
 	do \
 	  ./${TARGET}-silent < tests/$$f.in | diff -ruh - tests/$$f.out; \
+	done
+	@for f in ${FAIL_TESTS}; \
+	do \
+	  (./${TARGET}-silent < tests/$$f.in 2>&1 || true) | grep -i error > /dev/null || echo "FAILED: $$f"; \
 	done
