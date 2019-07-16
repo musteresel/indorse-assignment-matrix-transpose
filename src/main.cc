@@ -31,6 +31,15 @@ PrintMatrix(std::vector<int> const & matrix,
 }
 
 
+bool
+HasValidDimensions(unsigned const rows,
+                   unsigned const columns)
+{
+  return (rows > 0) && (columns > 0)
+    && (rows < 8) && (columns < 8);
+}
+
+
 int
 main()
 {
@@ -43,6 +52,11 @@ main()
     {
       std::cerr << "IO Error, could not get rows/columns"
                 << std::endl;
+      return EXIT_FAILURE;
+    }
+  if (! HasValidDimensions(rows, columns))
+    {
+      std::cerr << "Error, dimensions invalid!" << std::endl;
       return EXIT_FAILURE;
     }
   std::vector<int> matrix;
