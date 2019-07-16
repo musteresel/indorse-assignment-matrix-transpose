@@ -1,5 +1,6 @@
 SOURCES=src/main.cc src/transpose.cc src/adapter.cc
 HEADERS=src/transpose.h
+TESTS=square1 square3
 
 
 TARGET=transpose
@@ -21,3 +22,11 @@ ${TARGET}-silent: ${DEPENDENCIES}
 .PHONY: clean
 clean:
 	${RM} ${TARGET} ${TARGET}-silent
+
+
+.PHONY: test
+test: ${TARGET}-silent
+	@for f in ${TESTS}; \
+	do \
+	  ./${TARGET}-silent < tests/$$f.in | diff -ruh - tests/$$f.out; \
+	done
